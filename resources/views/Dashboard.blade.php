@@ -1,105 +1,81 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Dashboard Prodi</title>
-    <!-- AdminLTE & Bootstrap CSS CDN -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" />
-</head>
-<body class="hold-transition sidebar-mini">
-<div class="wrapper">
+@extends('adminlte::page')
 
-    <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Home</a>
-            </li>
-        </ul>
-    </nav>
+@section('title', 'Dashboard')
 
-    <!-- Sidebar -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
-        <a href="#" class="brand-link">
-            <span class="brand-text font-weight-light ml-2">Prodi</span>
-        </a>
+@section('content_header')
+    <h1>Dashboard</h1>
+@stop
 
-        <div class="sidebar">
-            <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" role="menu">
-                    <li class="nav-item">
-                        <a href="{{ url('/dashboard') }}" class="nav-link active">
-                            <i class="nav-icon fas fa-graduation-cap"></i>
-                            <p>Program Studi</p>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+@section('content')
+
+    <div class="tab-content" id="dashboardTabsContent">
+        <div class="tab-pane fade show active" id="prodi" role="tabpanel">
+            <!-- Tabel Prodi -->
+            <a href="{{ route('prodi.create') }}" class="btn btn-primary my-3">Tambah Prodi</a>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Kode Prodi</th>
+                        <th>Nama Prodi</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($dataProdi as $prodi)
+                        <tr>
+                            <td>{{ $prodi->kode_prodi }}</td>
+                            <td>{{ $prodi->nama_prodi }}</td>
+                            <td>
+                                <a href="{{ route('prodi.edit', $prodi->kode_prodi) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <form action="{{ route('prodi.destroy', $prodi->kode_prodi) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                    @if ($dataProdi->isEmpty())
+                        <tr>
+                            <td colspan="3" class="text-center">Data program studi belum tersedia.</td>
+                        </tr>
+                    @endif
+                </tbody>
+            </table>
         </div>
-    </aside>
-
-    <!-- Content Wrapper -->
-    <div class="content-wrapper">
-        <section class="content-header pt-3 pb-2">
-            <div class="container-fluid">
-                <h1>Daftar Program Studi</h1>
-            </div>
-        </section>
-
-        <section class="content">
-            <div class="container-fluid">
-                <a href="{{ route('prodi.create') }}" class="btn btn-primary mb-3">Tambah Prodi</a>
-                <div class="card">
-                    <div class="card-body table-responsive p-0">
-                        <table class="table table-hover text-nowrap">
-                            <thead>
-                                <tr>
-                                    <th>Kode Prodi</th>
-                                    <th>Nama Prodi</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse($dataProdi as $prodi)
-                                <tr>
-                                    <td>{{ $prodi->kode_prodi }}</td>
-                                    <td>{{ $prodi->nama_prodi }}</td>
-                                    <td>
-                                        <a href="{{ route('prodi.edit', $prodi->kode_prodi) }}" class="btn btn-sm btn-warning">Edit</a>
-                                        <form action="{{ route('prodi.destroy', $prodi->kode_prodi) }}" method="POST" style="display:inline-block;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin hapus?')">Hapus</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                @empty
-                                <tr>
-                                    <td colspan="3" class="text-center">Data prodi belum tersedia</td>
-                                </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div class="tab-pane fade" id="kelas" role="tabpanel">
+            <!-- Tabel Kelas -->
+            <a href="{{ route('kelas.create') }}" class="btn btn-primary my-3">Tambah Kelas</a>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID Kelas</th>
+                        <th>Nama Kelas</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($dataKelas as $kelas)
+                        <tr>
+                            <td>{{ $kelas->id_kelas }}</td>
+                            <td>{{ $kelas->nama_kelas }}</td>
+                            <td>
+                                <a href="{{ route('kelas.edit', $kelas->id_kelas) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <form action="{{ route('kelas.destroy', $kelas->id_kelas) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                    @if ($dataKelas->isEmpty())
+                        <tr>
+                            <td colspan="3" class="text-center">Data kelas belum tersedia.</td>
+                        </tr>
+                    @endif
+                </tbody>
+            </table>
+        </div>
     </div>
-
-    <footer class="main-footer text-center">
-        <strong>Hak Cipta &copy; {{ date('Y') }}.</strong> All rights reserved.
-    </footer>
-
-</div>
-
-<!-- JS dependencies -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
-</body>
-</html>
+@stop
