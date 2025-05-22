@@ -34,8 +34,11 @@
             <input type="text" id="nama_prodi" name="nama_prodi" class="form-control" value="{{ old('nama_prodi') }}" required>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-        <a href="{{ route('prodi.index') }}" class="btn btn-danger btn-sm">Kembali</a>
+        <div class="d-flex gap-2">
+    <button type="submit" class="btn btn-primary btn-lg w-auto">Simpan</button>
+    <a href="{{ route('prodi.index') }}" class="btn btn-secondary btn-lg w-auto">Kembali</a>
+</div>
+
     </form>
 </div>
 

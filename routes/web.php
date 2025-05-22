@@ -32,4 +32,11 @@ use App\Http\Controllers\DataProdiController;
 Route::resource('prodi', DataProdiController::class);
 
 
+Route::get('/dataProdi/{kode_prodi}', [DataProdiController::class, 'show'])->name('prodi.show');
+
+Route::put('/dataProdi/{kode_prodi}', [DataProdiController::class, 'update'])->name('prodi.update');
+
+
+
+
 

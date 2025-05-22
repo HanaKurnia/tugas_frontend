@@ -4,61 +4,52 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Edit Prodi</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" />
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
-<body class="hold-transition sidebar-mini">
-<div class="wrapper">
+<body class="bg-light">
 
-    <!-- Navbar dan Sidebar sama seperti dashboard -->
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Edit Program Studi</h2>
 
-    <div class="content-wrapper">
-        <section class="content-header pt-3 pb-2">
-            <div class="container-fluid">
-                <h1>Edit Program Studi</h1>
-            </div>
-        </section>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-        <section class="content">
-            <div class="container-fluid">
-                <a href="{{ route('prodi.index') }}" class="btn btn-secondary mb-3">Kembali</a>
+            <form action="{{ url('/dataProdi/'.$dataProdi->kode_prodi) }}" method="POST" class="card p-4 shadow-sm">
+                @csrf
+                @method('PUT')
 
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul class="mb-0">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                <div class="mb-3">
+                    <label for="kode_prodi" class="form-label">Kode Prodi</label>
+                    <input type="text" name="kode_prodi" id="kode_prodi" class="form-control" value="{{ old('kode_prodi', $dataProdi->kode_prodi) }}" readonly>
+                    <small class="form-text text-muted">Kode Prodi tidak bisa diubah.</small>
+                </div>
 
-                <form action="{{ url('/dataProdi/'.$dataProdi->kode_prodi) }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <div class="form-group">
-                        <label for="kode_prodi">Kode Prodi</label>
-                        <input type="text" name="kode_prodi" class="form-control" id="kode_prodi" value="{{ old('kode_prodi', $dataProdi->kode_prodi) }}" readonly>
-                        <small class="form-text text-muted">Kode Prodi tidak bisa diubah.</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="nama_prodi">Nama Prodi</label>
-                        <input type="text" name="nama_prodi" class="form-control" id="nama_prodi" value="{{ old('nama_prodi', $dataProdi->nama_prodi) }}" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
-                </form>
-            </div>
-        </section>
+                <div class="mb-3">
+                    <label for="nama_prodi" class="form-label">Nama Prodi</label>
+                    <input type="text" name="nama_prodi" id="nama_prodi" class="form-control" value="{{ old('nama_prodi', $dataProdi->nama_prodi) }}" required>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary btn-sm w-auto">Simpan</button>
+                    <a href="{{ route('prodi.index') }}" class="btn btn-secondary btn-sm w-auto">Kembali</a>
+                </div>
+            </form>
+        </div>
     </div>
-
-    <footer class="main-footer text-center">
-        <strong>Hak Cipta &copy; {{ date('Y') }}.</strong>
-    </footer>
-
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -15,4 +15,10 @@ class DataProdi extends Model
     protected $fillable = ['kode_prodi', 'nama_prodi'];
 
     public $timestamps = false;
+
+    public function getRouteKeyName()
+{
+    return 'kode_prodi';
+}
+
 }

@@ -43,16 +43,18 @@ class DataProdiController extends Controller
     }
 
     public function update(Request $request, $kode_prodi)
-    {
-        $request->validate([
-            'nama_prodi' => 'required|max:100',
-        ]);
+{
+    $request->validate([
+        'nama_prodi' => 'required|string|max:100',
+    ]);
 
-        $dataProdi = DataProdi::where('kode_prodi', $kode_prodi)->firstOrFail();
-        $dataProdi->update($request->only('nama_prodi'));
+    $prodi = DataProdi::where('kode_prodi', $kode_prodi)->firstOrFail();
+    $prodi->update([
+        'nama_prodi' => $request->nama_prodi,
+    ]);
 
-        return redirect()->route('prodi.index')->with('success', 'Data prodi berhasil diperbarui.');
-    }
+    return redirect()->route('prodi.index')->with('success', 'Data berhasil diupdate');
+}
 
     public function destroy($kode_prodi)
     {
