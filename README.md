@@ -280,7 +280,7 @@ class DataProdi extends Model
 
 ```
 
-Lalu jalankan migrasi:
+- Lalu jalankan migrasi:
 
 ```bash
 php artisan migrate
