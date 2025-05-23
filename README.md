@@ -1,7 +1,7 @@
 
 # 📘 Tutorial Laravel CRUD dengan AdminLTE
 
-Aplikasi ini adalah contoh implementasi CRUD sederhana untuk data **Program Studi (Prodi)** menggunakan **Laravel 10** dan **AdminLTE**.
+Aplikasi ini adalah contoh implementasi CRUD sederhana untuk data **Program Studi (Prodi) dan Kelas** menggunakan **Laravel 10** dan **AdminLTE**.
 
 Siap Hana! 🧑‍💻 Ini aku tambahkan **panduan lengkap untuk clone repository dari GitHub**, cocok untuk kamu atau tim yang mau ambil source code backend Laravel dari GitHub ke lokal.
 
@@ -252,7 +252,7 @@ php artisan make:model DataProdi -m
 - Buat model untuk prodi
 - Untuk kelas tidak menggunakan model
 
-### - `models/DataProdi.php:
+### - `models/DataProdi.php`:
 
 ```php
 <?php
