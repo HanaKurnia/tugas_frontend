@@ -3,8 +3,6 @@
 
 Aplikasi ini adalah contoh implementasi CRUD sederhana untuk data **Program Studi (Prodi) dan Kelas** menggunakan **Laravel 10** dan **AdminLTE**.
 
-Siap Hana! 🧑‍💻 Ini aku tambahkan **panduan lengkap untuk clone repository dari GitHub**, cocok untuk kamu atau tim yang mau ambil source code backend Laravel dari GitHub ke lokal.
-
 ---
 
 ### 🐙 Cara Clone Repository GitHub (Backend)
